@@ -2,6 +2,7 @@ import os
 import cv2
 import numpy as np
 
+# Define filepath
 script_dir = os.path.dirname(os.path.abspath(__file__))
 image_path = os.path.join(script_dir,"motherboard_image.jpeg")
 output_path = os.path.join(script_dir,"maskingoutput")
