@@ -3,7 +3,7 @@ from ultralytics import YOLO
 import cv2
 
 # Load the YOLOv8 Nano model
-model = YOLO('runs/detect/train13/weights/best.pt') 
+model = YOLO('runs/detect/train15/weights/best.pt') 
 
 # Path to the evaluation images
 image_directory = 'data/evaluation/'

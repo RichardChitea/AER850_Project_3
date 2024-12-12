@@ -31,7 +31,7 @@ def train_yolov8_nano(data_yaml, epochs, batch_size, img_size, save_path, patien
     # Initialize YOLOv8 Nano model
     model = YOLO('yolov8n.yaml')  # Specify the YOLOv8 nano architecture
 
-    # Train the model with early stopping, mixed precision, gradient accumulation, and memory-efficient optimizer
+    # Train the model with early stopping, mixed precision, and memory-efficient optimizer
     try:
         model.train(
             data=data_yaml,  # Path to dataset YAML file
@@ -41,8 +41,8 @@ def train_yolov8_nano(data_yaml, epochs, batch_size, img_size, save_path, patien
             patience=patience,  # Early stopping patience
             device=device,  # Specify device (GPU or CPU)
             amp=True,  # Enable mixed precision training
-            accum=2,  # Gradient accumulation (simulate larger batch size)
-            optimizer='AdamW'  # Memory-efficient optimizer
+            optimizer='AdamW',  # Memory-efficient optimizer
+            workers=12  # Number of data loading workers
         )
     except RuntimeError as e:
         print("Mixed precision training is not supported on this device. Retrying without AMP...")
@@ -54,8 +54,8 @@ def train_yolov8_nano(data_yaml, epochs, batch_size, img_size, save_path, patien
             patience=patience,  # Early stopping patience
             device=device,  # Specify device (GPU or CPU)
             amp=False,  # Disable mixed precision training
-            accum=2,  # Gradient accumulation (simulate larger batch size)
-            optimizer='AdamW'  # Memory-efficient optimizer
+            optimizer='AdamW',  # Memory-efficient optimizer
+            workers=12  # Number of data loading workers
         )
 
     # Save the trained model
